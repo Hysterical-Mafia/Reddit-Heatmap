@@ -6,7 +6,7 @@ const status = document.getElementById("status");
 
 function updateOutput(text) {
     status.textContent = text;
-    console.log("First Step")
+    console.log("First test")
 }
     searchBtn.addEventListener("click", async function() {
     const keyword = input.value; 
@@ -16,19 +16,12 @@ function updateOutput(text) {
         return;
     }
     updateOutput("Searching for: " + keyword);
+    console.log("Second test")
     
-    const url = `/api/search?keyword=` + keyword;
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    const posts = data.data.children;
-    output.innerHTML = "";
     for (let i = 0; i < posts.length; i++) {
-        const post = posts[i];
-        const title = post.data.title;
-
         const newDiv = document.createElement("div");
-        newDiv.id = "item" + i ;
+        newDiv.classList.add("postDiv" + i);
+        console.log("Third test")
         newDiv.className = "post";
         newDiv.textContent = title;
 
