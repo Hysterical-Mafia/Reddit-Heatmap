@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     const redditUrl = `https://www.reddit.com/search.json?q=${keyword}`;
 
     const response =   await fetch(redditUrl);
-    const data = await responsope.json();
+    const data = await response.json();
     const posts = data.data.children;
 
     const cleanPosts = [];
@@ -20,13 +20,18 @@ export default async function handler(req, res) {
         const ratio = post.data.upvote_ratio;
         const permalink = post.data.permalink;
 
-        cleanPosts.push(post, title, subreddit, upvotes, downvotes, ratio, permalink);
+
     }
     
     res.status(200).json({
         message: "You searched for " + keyword,
         posts: [
-            { title, subreddit, upvotes, downvotes, ratio, permalink}
+            {title},
+            {subreddit},
+            {upvotes},
+            {permalink},
+            {ratio},
+            {downvotes},
         ]
 
     })
