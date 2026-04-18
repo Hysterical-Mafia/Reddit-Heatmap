@@ -3,13 +3,10 @@ export default async function handler(req, res) {
         const rawKeyword = req.query.keyword;
 
         if (!rawKeyword) {
-            return res.status(400).json({
-                error: "Missing keyword"
-            });
+            return res.status(400).json({ error: "Missing keyword" });
         }
 
-        const keyword = encodeURIComponent(rawKeyword);
-        const url = `https://www.reddit.com/search.json?q=${keyword}&limit=30`;
+        const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(rawKeyword)}&limit=30`;
 
         const response = await fetch(url, {
             headers: {
@@ -19,13 +16,20 @@ export default async function handler(req, res) {
 
         if (!response.ok) {
             return res.status(500).json({
-                error: "Failed to fetch Reddit data"
+                error: "Reddit API failed",
+                status: response.status
             });
         }
 
         const data = await response.json();
 
-        const children = data?.data?.children || [];
+        const children = data?.data?.children;
+
+        if (!Array.isArray(children)) {
+            return res.status(500).json({
+                error: "Invalid Reddit response structure"
+            });
+        }
 
         const posts = children.slice(0, 30).map(item => {
             const post = item.data;
@@ -34,7 +38,6 @@ export default async function handler(req, res) {
                 title: post.title,
                 subreddit: post.subreddit_name_prefixed,
                 upvotes: post.ups,
-                downvotes: post.downs,
                 ratio: post.upvote_ratio,
                 permalink: `https://reddit.com${post.permalink}`
             };
@@ -48,7 +51,7 @@ export default async function handler(req, res) {
     } catch (err) {
         return res.status(500).json({
             error: "Server crash",
-            details: err.message
+            message: err.message
         });
     }
 }

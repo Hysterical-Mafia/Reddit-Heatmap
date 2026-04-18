@@ -22,31 +22,31 @@ function renderPosts(posts) {
     });
 }
 
-async function searchReddit(keyword) {
-    const response = await fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`);
+async function fetchReddit(keyword) {
+    const res = await fetch(`/api/search?keyword=${encodeURIComponent(keyword)}`);
 
-    if (!response.ok) {
-        throw new Error("API request failed");
+    if (!res.ok) {
+        throw new Error("API failed");
     }
 
-    return await response.json();
+    return await res.json();
 }
 
 searchBtn.addEventListener("click", async () => {
     const keyword = input.value.trim();
 
     if (!keyword) {
-        alert("Input is empty");
+        setStatus("Empty input");
         return;
     }
 
     try {
-        setStatus(`Searching: ${keyword}...`);
+        setStatus("Searching...");
 
-        const data = await searchReddit(keyword);
+        const data = await fetchReddit(keyword);
 
         if (!data.posts || data.posts.length === 0) {
-            setStatus("No results found");
+            setStatus("No results");
             clearOutput();
             return;
         }
