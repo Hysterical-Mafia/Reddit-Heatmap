@@ -17,13 +17,13 @@ function updateOutput(text) {
     updateOutput("Searching for: " + keyword);
     console.log("Second test");
     
-    const response = await fetch `/api/search?keyword=${keyword}`;
+    const response = await fetch(`/api/search?keyword=${keyword}`);
     const data = await response.json();
 
     output.innerHTML = "";
 
     for (let i = 0; i < data.posts.length; i++) {
-        const post = data(posts[i]);
+        const post = data.posts[i];
 
         const newDiv = document.createElement("div");
         newDiv.className = "post";
