@@ -9,7 +9,7 @@ searchBtn.addEventListener("click", async function() {
     console.log("Step 1: Get Input")
     validate(keyword)
     console.log("Step 2: Validate")
-    getData.async(keyword)
+    getData(keyword)
     console.log("Step 3: Get Input")
 })
 
@@ -20,12 +20,16 @@ function getInput(keyword){
 function validate(keyword){
     if (keyword.length >= 30 | keyword.trim() == "" ) {
         status.textContent = "Invalid Input";
-        console.error("INVALID INPUT")
-    }}
+        console.error("INVALID INPUT");
+        return false;
+    }
+    return true;
+}
 
-function getData(keyword){
-    url = fetch(`/api/search?keyword=${keyword}`);
-    console.log("Data Fetch")
+async function getData(keyword){
+    const res = await fetch(`/api/search?keyword=${keyword}`);
+    const data = await res.json();
+    renderUI(data.posts)
 }
 
 function renderUI(keyword){

@@ -8,25 +8,22 @@ export default async function handler(req, res) {
     }
     const keyword = encodeURIComponent(rawKeyword);
 
-    const response = await fetch(BASE_URL)
+    const response = await fetch(`${BASE_URL}${keyword}`);
     const data = await response.json();
 
     const hits = data.hits
 
     const cleanPosts = [];
 
-    for (let i = 0; i < Math.min(posts.length, 30); i++) {
+    for (let i = 0; i < Math.min(hits.length, 30); i++) {
         const post = hits[i];
 
         cleanPosts.push ({
             title: post.title,
-            type: post.type,
-            score: post.score,
-            time: post.time,
+            author: post.author,
+            score: post.points,
+            time: post.created_at,
             url: post.url,
-            userCreated: post.created,
-            url: post.url,
-
         });
     }
 
