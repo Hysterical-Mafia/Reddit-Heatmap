@@ -6,8 +6,11 @@ const status = document.getElementById("status");
 searchBtn.addEventListener("click", async function() {
     const keyword = input.value;
     getInput(keyword)
+    console.log("test")
     validate(keyword)
-    getData()
+
+  
+    getData(keyword)
 })
 
 function getInput(keyword){
