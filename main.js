@@ -3,20 +3,28 @@ const searchBtn = document.getElementById("search-btn");
 const output = document.getElementById("output-section");
 const status = document.getElementById("status");
 
-function getInput(){
-    status.textContent = input;
-    console.log(check)
+searchBtn.addEventListener("click", async function() {
+    const keyword = input.value;
+    getInput(keyword)
+    validate(keyword)
+    getData()
+})
+
+function getInput(keyword){
+    status.textContent = keyword;
 }
 
-function validate(){
-    if (input == "")
+function validate(keyword){
+    if (keyword.trim() == "") {
         status.textContent = "Invalid Input";
+        console.error("INVALID INPUT")
+    }}
+
+function getData(keyword){
+    url = fetch(`/api/search?keyword=${keyword}`);
+    console.log("Data Fetch")
 }
 
-function getData(){
-    const apiUrl = api/search.js
-}
-
-function renderUI(){
-
+function renderUI(keyword){
+    output.textContent = keyword
 }
