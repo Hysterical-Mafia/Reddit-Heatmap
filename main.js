@@ -13,6 +13,8 @@ searchBtn.addEventListener("click", async function() {
     console.log("Step 3: Get Input")
 })
 
+output.innerHTML = "";
+
 function getInput(keyword){
     status.textContent = keyword;
 }
