@@ -7,7 +7,6 @@ export default async function handler(req, res) {
     const keyword = encodeURIComponent(rawKeyword);
 
     const redditUrl = `https://www.reddit.com/search.json?q=${keyword}`;
-
     const response =   await fetch(redditUrl,  {
         headers: {
             "User-Agent": "reddit-heatmap-app/1.0"

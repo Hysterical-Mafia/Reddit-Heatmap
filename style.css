@@ -44,8 +44,8 @@ button:hover, input:hover {
 }
 
 #status {
-    color: rgb(206, 204, 204);
-    border: 1px;
+    color: rgb(255, 0, 0);
+    border: solid 6px;
 }
 
 #output-section {

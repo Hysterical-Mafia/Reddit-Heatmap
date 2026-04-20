@@ -3,34 +3,20 @@ const searchBtn = document.getElementById("search-btn");
 const output = document.getElementById("output-section");
 const status = document.getElementById("status");
 
-function updateOutput(text) {
-    status.textContent = text;
-    console.log("First test")
+function getInput(){
+    status.textContent = input;
+    console.log(check)
 }
-    searchBtn.addEventListener("click", async function() {
-    const keyword = input.value; 
 
-    if (keyword.trim() == "") {
-        alert("my input has no value");
-        return;
-    }
-    updateOutput("Searching for: " + keyword);
-    console.log("Second test");
-    
-    const response = await fetch(`/api/search?keyword=${keyword}`);
-    const data = await response.json();
+function validate(){
+    if (input == "")
+        status.textContent = "Invalid Input";
+}
 
-    output.innerHTML = "";
+function getData(){
+    const apiUrl = api/search.js
+}
 
-    for (let i = 0; i < data.posts.length; i++) {
-        const post = data.posts[i];
+function renderUI(){
 
-        const newDiv = document.createElement("div");
-        newDiv.className = "post";
-        newDiv.textContent = post.title;
-        output.appendChild(newDiv);
-    }
-});
-
-
-
+}
