@@ -16,7 +16,7 @@ searchBtn.addEventListener("click", async function() {
     if (!validate(keyword)) {
         status.textContent = "Invalid Input";
         console.error("INVALID INPUT");
-        output.textContent == "Try Again";
+        output.textContent = "Try Again";
         return;
     }
 
