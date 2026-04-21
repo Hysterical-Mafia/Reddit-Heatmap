@@ -15,34 +15,19 @@ function convertUnix(){
 
 
 
-function updateOutput(text) {
-    status.textContent = text;
-    console.log("First test")
-}
-    searchBtn.addEventListener("click", async function() {
-    const keyword = input.value; 
+end of validate function, return True or False
+if validate == True, 
+    pass / ignore and move on
+if validate == False, 
+    Error Message and does not move forward and completely ignores the request with a message
 
-    if (keyword.trim() == "") {
-        alert("my input has no value");
-        return;
+
+function validate(keyword){
+    if (keyword.length >= 30 | keyword.trim() == "" ) {
+        return False,
+    else 
+        return True
     }
-    updateOutput("Searching for: " + keyword);
-    
-    const response = await fetch(`/api/search?keyword=${keyword}`);
-    const data = await response.json();
-
-    output.innerHTML = "";
-
-    for (let i = 0; i < data.posts.length; i++) {
-        const post = data.posts[i];
-
-        const newDiv = document.createElement("div");
-        newDiv.className = "post";
-        newDiv.textContent = post.title;
-        output.appendChild(newDiv);
-    }
-});
-
 
 
 

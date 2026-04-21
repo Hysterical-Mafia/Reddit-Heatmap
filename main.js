@@ -5,10 +5,15 @@ const status = document.getElementById("status");
 
 searchBtn.addEventListener("click", async function() {
     const keyword = input.value;
+
     getInput(keyword)
-    console.log("Step 1: Get Input")
-    validate(keyword)
-    console.log("Step 2: Validate")
+
+    if (!validate(keyword)) {
+        status.textContent = "Invalid Input";
+        console.error("INVALID INPUT");
+        return;
+    }
+    
     getData(keyword)
     console.log("Step 3: Get Input")
 })
@@ -18,10 +23,11 @@ function getInput(keyword){
 }
 
 function validate(keyword){
-    if (keyword.length >= 30 | keyword.trim() == "" ) {
-        status.textContent = "Invalid Input";
-        console.error("INVALID INPUT");
-    }}
+    if (keyword.length >= 30 || keyword.trim() === "" ) {
+        return false;
+    }
+    return true;
+}
 
 async function getData(keyword){
     const res = await fetch(`/api/search?keyword=${keyword}`);
