@@ -9,7 +9,6 @@ input.addEventListener("keypress", function(e) {
 })
 
 searchBtn.addEventListener("click", async function() {
-    output.textContent == "";
     const keyword = input.value;
 
     getInput(keyword)
@@ -17,6 +16,7 @@ searchBtn.addEventListener("click", async function() {
     if (!validate(keyword)) {
         status.textContent = "Invalid Input";
         console.error("INVALID INPUT");
+        output.textContent == "Try Again";
         return;
     }
 
