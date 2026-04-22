@@ -11,16 +11,12 @@ input.addEventListener("keypress", function(e) {
 searchBtn.addEventListener("click", async function() {
     const keyword = input.value;
 
-    getInput(keyword)
-
     if (!validate(keyword)) {
         status.textContent = "Invalid Input";
-        console.error("INVALID INPUT");
-        output.textContent = "Try Again";
         return;
     }
-
-    getData(keyword)
+    getInput(keyword)
+    await getData(keyword)
 
 })
 
@@ -43,6 +39,8 @@ async function getData(keyword){
 }
 
 function renderUI(posts, keyword){
+    output.innerHTML = "";
+    console.log(output.innerText)
     status.textContent = ("Searching for: " + keyword);
         for (let i = 0; i < posts.length; i++) {
             const post = posts[i];

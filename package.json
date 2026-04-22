@@ -9,6 +9,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
-  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hysterical-Mafia/Trend-Pulse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hysterical-Mafia/Trend-Pulse/issues"
+  },
+  "homepage": "https://github.com/Hysterical-Mafia/Trend-Pulse#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
