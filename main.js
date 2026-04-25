@@ -3,15 +3,16 @@ const searchBtn = document.getElementById("search-btn");
 const output = document.getElementById("output-section");
 const status = document.getElementById("status");
 
-input.addEventListener("keypress", function(e) {
-    if (e.key == "Enter")
-        console.log("Enter With `enter` key")
-})
+input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        document.getElementById(searchBtn).click();
+    }
+});
 
 searchBtn.addEventListener("click", async function() {
     const keyword = input.value;
 
-    if (!validate(keyword)) {
+    if (validate(keyword) === "title") {
         status.textContent = "Invalid Input";
         return;
     }
@@ -43,12 +44,11 @@ function renderUI(posts, keyword){
     console.log(output.innerText)
     status.textContent = ("Searching for: " + keyword);
         for (let i = 0; i < posts.length; i++) {
-            const post = posts[i];
-
+            const post = posts[posts.length];
+            
             const newDiv = document.createElement("div");
             newDiv.className = "post";
             newDiv.textContent = post.title;
             output.appendChild(newDiv);
-    }
-
+    };
     }
