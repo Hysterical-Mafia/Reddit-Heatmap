@@ -5,21 +5,25 @@ const status = document.getElementById("status");
 
 input.addEventListener("keydown", function(e) {
     if (e.key === "Enter") {
-        document.getElementById(searchBtn).click();
+        searchBtn.click();
     }
 });
 
 searchBtn.addEventListener("click", async function() {
-    const keyword = input.value;
+    const keyword = input.value.trim().toLowerCase();
 
     if (validate(keyword) === "title") {
         status.textContent = "Invalid Input";
         return;
     }
     getInput(keyword)
+    
     await getData(keyword)
 
 })
+
+
+
 
 function getInput(keyword){
     status.textContent = keyword;
@@ -44,12 +48,12 @@ function renderUI(posts, keyword){
     console.log(output.innerText)
     status.textContent = ("Searching for: " + keyword);
         for (let i = 0; i < posts.length; i++) {
-            let post = posts[i];
-            for (post in posts) {
-                const newDiv = document.createElement("div");
-                newDiv.className = "post";
-                newDiv.textContent = post.title;
-                output.appendChild(newDiv);
-            };
-        };
-}
+            const post = posts[i];
+
+            const newDiv = document.createElement("div");
+            newDiv.className = "post";
+            newDiv.textContent = post.title;
+            output.appendChild(newDiv);
+    }
+
+    }
