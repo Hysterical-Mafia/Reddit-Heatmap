@@ -91,7 +91,7 @@ function renderUI(posts, keyword){
                 
             </div>
         `;
-        if (post.url) { 
+        if (post.url && post.url.startsWith("http")) { 
             newDiv.addEventListener("click", () => {
                 window.open(post.url, "_blank");
             });
