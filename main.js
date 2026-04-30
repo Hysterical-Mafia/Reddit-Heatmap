@@ -33,30 +33,41 @@ function validate(keyword){
 }
 
 async function getData(keyword){
+    
+    try {
+        const res = await fetch(`/api/search?keyword=${keyword}`);
+        if (!res.ok) {
+            throw new Error("API Error: " + res.status);
+        }
 
-    //try statments, first check for network problems like no connection, timeout, dns
-    //https response check if res.ok for 200-299 or res.status, code continues like everything fine no matter what
-    //currently getting a contract, message with string, posts with array of objected and each object with certain fields like name,score etc.
-    //  a failure could mean null or missing values or unexpected shaped.
-    const res = await fetch(`/api/search?keyword=${keyword}`);
-    const data = await res.json();
-    console.log("Step 4: " + keyword)
-    renderUI(data.posts, keyword)
+        const data = await res.json();
+        if (!data.posts) {
+            throw new Error("Wrong Response")
+        }
+
+        renderUI(data.posts, keyword);
+    } 
+    catch (err) {
+        console.error(err);
+        status.textContent = "Error fetching results"
+    }
 }
 
 function renderUI(posts, keyword){
     output.innerHTML = "";
-
     status.textContent = ("Searching for: " + keyword);
-        for (let i = 0; i < posts.length; i++) {
-            const post = posts[i];
 
-            const newDiv = document.createElement("div");
-            newDiv.className = "post";
-            newDiv.textContent = post.title;
-            output.appendChild(newDiv);
+    if (!posts || posts.length === 0) {
+        status.textContent = "No results found";
+        return;
+    }
+    for (let i = 0; i < posts.length; i++) {
+        const post = posts[i];
+
+        const newDiv = document.createElement("div");
+        newDiv.className = "post";
+        newDiv.textContent = post.title || "No Title";
+        output.appendChild(newDiv);
     }
 
     }
-        //ex. not enough characters for results, no search results found, limited results found 
-        // not necessarily have to add the latter, mostly just for UI experience
