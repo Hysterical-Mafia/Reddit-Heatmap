@@ -55,6 +55,7 @@ header {
     border: 1px solid #2a2f3a;
     padding: 14px;
     width: 100%;
+    max-width: 700px;
     border-radius: 8px;
     overflow-wrap: break-word;
     transition: transform 200ms ease, background-color 200ms ease;
@@ -92,6 +93,11 @@ main {
     max-width: 900px;
 }
 
+#search-input {
+    width: 200px;
+    max-width: 100%;
+}
+
 #search-input:hover {
     background-color: #232834;
 }
@@ -100,4 +106,31 @@ a {
     text-decoration: none;
     color: inherit;
     display: block;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+    #controls-section {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+
+    .post {
+        width: 95%;
+    }
+
+    body {
+        font-size: 0.85rem;
+    }
 }
