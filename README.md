@@ -2,7 +2,7 @@
 (WORK IN PROGRESS)
 
 ## Live Demo
-Deployed on Vercel: https://trend-pulse-k4smnr21r-hysterical-mafias-projects.vercel.app/
+Deployed on Vercel: https://trend-pulse-website.vercel.app/
 
 ## Overview
 A frontend web application that allows users to search and filter content dynamically using keyword input. The app fetches data from a backend API and renders results in real time.
